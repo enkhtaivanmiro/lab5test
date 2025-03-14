@@ -20,12 +20,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: 'temurin'   # ✅ Use the latest OpenJDK distribution
+          java-version: '21'        # ✅ Java 21 version
 
       - name: Run Maven Tests
-        working-directory: ./Java 
+        working-directory: ./Java   # ✅ Your pom.xml is in java/ folder
         run: mvn test -Dtest=IntQueueTest -Dqueue=${{ matrix.queue }}
