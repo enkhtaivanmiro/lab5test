@@ -21,27 +21,24 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Navigate to Java folder
-        run: cd Java
-
       - name: Build and Run Tests
-        run: mvn clean test -f ./java/pom.xml
+        run: mvn clean test -f ./Java/pom.xml
 
       - name: Generate JaCoCo Coverage Report
-        run: mvn jacoco:report -f ./java/pom.xml
+        run: mvn jacoco:report -f ./Java/pom.xml
 
-      - name: Upload JaCoCo Report (Code Coverage)
+      - name: Upload JaCoCo Report
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: java/target/site/jacoco/
+          path: Java/target/site/jacoco/
 
       - name: Upload Surefire Test Reports
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
-          path: java/target/surefire-reports/
+          path: Java/target/surefire-reports/
 
       - name: Display Test Results in Logs
         if: always()
-        run: cat java/target/surefire-reports/*.txt || true
+        run: cat Java/target/surefire-reports/*.txt || true
