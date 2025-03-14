@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @author Ye Lu
  */
 public class ArrayIntQueue implements IntQueue {
-
+    
     /**
      * An array holding this queue's data
      */
@@ -38,6 +38,7 @@ public class ArrayIntQueue implements IntQueue {
     /**
      * Constructs an empty queue with an initial capacity of ten.
      */
+    
     public ArrayIntQueue() {
         elementData = new int[INITIAL_SIZE];
         head = 0;
@@ -46,21 +47,18 @@ public class ArrayIntQueue implements IntQueue {
 
     /** {@inheritDoc} */
     public void clear() {
-        Arrays.fill(elementData, 0);
         size = 0;
         head = 0;
     }
 
     /** {@inheritDoc} */
     public Integer dequeue() {
-        if (isEmpty()) {
-            return null;
-        }
         Integer value = elementData[head];
         head = (head + 1) % elementData.length;
         size--;
         return value;
     }
+    
 
     /** {@inheritDoc} */
     public boolean enqueue(Integer value) {
@@ -73,11 +71,14 @@ public class ArrayIntQueue implements IntQueue {
 
     /** {@inheritDoc} */
     public boolean isEmpty() {
-        return size >= 0;
+        return size == 0;
     }
 
     /** {@inheritDoc} */
     public Integer peek() {
+        if(isEmpty()){
+            return null;
+        }
         return elementData[head];
     }
 
@@ -95,14 +96,14 @@ public class ArrayIntQueue implements IntQueue {
             int oldCapacity = elementData.length;
             int newCapacity = 2 * oldCapacity + 1;
             int[] newData = new int[newCapacity];
-            for (int i = head; i < oldCapacity; i++) {
-                newData[i - head] = elementData[i];
+    
+            for (int i = 0; i < size; i++) {
+                newData[i] = elementData[(head + i) % oldCapacity];
             }
-            for (int i = 0; i < head; i++) {
-                newData[head - i] = elementData[i];
-            }
+    
             elementData = newData;
             head = 0;
-        }
+        } 
     }
+    
 }
