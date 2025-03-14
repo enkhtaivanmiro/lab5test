@@ -27,5 +27,5 @@ jobs:
           java-version: '17'
 
       - name: Run Maven Tests
-        working-directory: ./lab5test/Java 
+        working-directory: ./Java 
         run: mvn test -Dtest=IntQueueTest -Dqueue=${{ matrix.queue }}
