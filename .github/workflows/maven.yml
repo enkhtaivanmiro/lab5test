@@ -12,10 +12,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        queue: [LinkedIntQueue, ArrayIntQueue]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -23,9 +19,9 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'   # ✅ Use the latest OpenJDK distribution
-          java-version: '21'        # ✅ Java 21 version
+          distribution: 'temurin'
+          java-version: '21'
 
       - name: Run Maven Tests
-        working-directory: ./Java   # ✅ Your pom.xml is in java/ folder
-        run: mvn test -Dtest=IntQueueTest -Dqueue=${{ matrix.queue }}
+        working-directory: ./Java  # Update this if your `pom.xml` is in another folder
+        run: mvn test
