@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        queue: [LinkedIntQueue, ArrayIntQueue]  # Test both implementations
+        queue: [LinkedIntQueue, ArrayIntQueue]
 
     steps:
       - name: Checkout repository
@@ -27,4 +27,5 @@ jobs:
           java-version: '17'
 
       - name: Run Maven Tests
+        working-directory: ./lab5test/Java 
         run: mvn test -Dtest=IntQueueTest -Dqueue=${{ matrix.queue }}
